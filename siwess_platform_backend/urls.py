@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from logbooks.views import LogBookViewSet, ReportViewSet, GeneratePDFReportView
-from accounts.views import DashboardStatsView, AdminStudentViewSet, RegisterView, UserProfileView, SupervisorListView
+from accounts.views import DashboardStatsView, AdminStudentViewSet, RegisterView, UserProfileView, SupervisorListView, SupervisorStudentsView
 
 router = DefaultRouter()
 router.register(r'logs', LogBookViewSet, basename='log')
@@ -28,4 +28,7 @@ urlpatterns = [
     path('api/supervisors/', SupervisorListView.as_view()), 
     
     path('api/reports/generate/<int:student_id>/', GeneratePDFReportView.as_view(), name='generate-pdf'),
+    
+    path('api/supervisor/students/', SupervisorStudentsView.as_view()),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

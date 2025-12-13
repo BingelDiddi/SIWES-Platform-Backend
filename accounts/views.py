@@ -61,3 +61,11 @@ class SupervisorListView(generics.ListAPIView):
     queryset = User.objects.filter(role='supervisor')
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
+    
+
+class SupervisorStudentsView(generics.ListAPIView):
+    serializer_class = StudentProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return StudentProfile.objects.filter(assigned_supervisor=self.request.user)
