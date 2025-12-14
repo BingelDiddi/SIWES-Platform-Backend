@@ -7,7 +7,7 @@ class LogEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = LogEntry
         fields = ['id', 'student', 'date', 'time_in', 'time_out', 'activities', 'status', 'supervisor_feedback', 'student_name', 'matric']
-        read_only_fields = ['status', 'supervisor_feedback'] 
+        read_only_fields = ['status', 'supervisor_feedback', 'student'] 
 
     def get_student_name(self, obj):
         return f"{obj.student.first_name} {obj.student.last_name}"
